@@ -1,0 +1,3861 @@
+/* ================================================================
+   CIENCIAS | UNIDAD EDUCATIVA FISCAL DOLORES SUCRE
+   HERBARIO CIENTÍFICO CONTEMPORÁNEO
+
+   Identidad visual:
+   Verde bosque, esmeralda, salvia, marfil y oro botánico.
+
+   Incluye:
+   - Portada con imagen cuadrada.
+   - Imagen de competencias con proporción 4:3.
+   - Tarjetas con efectos de profundidad.
+   - Animaciones y microinteracciones.
+   - Botones funcionales para otras especializaciones.
+   - Diseño botánico, natural y científico.
+
+   Sin media queries responsive.
+================================================================ */
+
+
+/* ================================================================
+   01. VARIABLES
+================================================================ */
+
+:root {
+    --pino: #15382f;
+    --pino-oscuro: #0d2923;
+    --bosque: #205642;
+    --bosque-claro: #2f7153;
+
+    --esmeralda: #438b69;
+    --esmeralda-claro: #78ad88;
+
+    --salvia: #b7cdb0;
+    --salvia-clara: #dce8d6;
+    --menta: #edf4e9;
+
+    --marfil: #faf8f0;
+    --marfil-claro: #fffdf8;
+    --blanco: #ffffff;
+
+    --oro: #c3a265;
+    --oro-claro: #e6d4a5;
+    --terracota: #bd795b;
+
+    --texto: #304238;
+    --texto-suave: #6b796e;
+    --texto-claro: #f8f5e9;
+
+    --borde: rgba(32, 86, 66, 0.16);
+    --borde-oro: rgba(195, 162, 101, 0.4);
+
+    --sombra-suave:
+        0 7px 22px rgba(15, 48, 37, 0.065),
+        0 2px 5px rgba(15, 48, 37, 0.025);
+
+    --sombra-media:
+        0 15px 36px rgba(15, 48, 37, 0.11),
+        0 4px 12px rgba(15, 48, 37, 0.04);
+
+    --sombra-intensa:
+        0 25px 60px rgba(9, 37, 27, 0.2);
+
+    --resplandor-verde:
+        0 0 30px rgba(67, 139, 105, 0.2);
+
+    --resplandor-oro:
+        0 0 25px rgba(195, 162, 101, 0.2);
+
+    --radio-pequeno: 12px;
+    --radio-medio: 22px;
+    --radio-grande: 32px;
+    --radio-organico: 46px;
+
+    --fuente-titulos: Georgia, "Times New Roman", serif;
+    --fuente-textos: "Segoe UI", Arial, sans-serif;
+
+    --ancho-contenido: 1240px;
+
+    --transicion-rapida: 0.22s ease;
+    --transicion: 0.38s cubic-bezier(0.2, 0.75, 0.25, 1);
+    --transicion-larga: 0.75s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+
+/* ================================================================
+   02. REINICIO Y CONFIGURACIÓN GENERAL
+================================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body.pagina-ciencias {
+    position: relative;
+    isolation: isolate;
+
+    min-height: 100vh;
+
+    overflow-x: clip;
+
+    color: var(--texto);
+    background: var(--marfil);
+
+    font-family: var(--fuente-textos);
+    font-size: 16px;
+    line-height: 1.8;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+p {
+    overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    overflow-wrap: break-word;
+}
+
+section {
+    position: relative;
+    scroll-margin-top: 100px;
+}
+
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+    outline: 3px solid var(--oro);
+    outline-offset: 5px;
+}
+
+::selection {
+    color: var(--blanco);
+    background: var(--bosque);
+}
+
+
+/* ================================================================
+   03. FONDO GLOBAL
+================================================================ */
+
+body.pagina-ciencias::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(250, 248, 240, 0.91),
+            rgba(238, 245, 232, 0.87),
+            rgba(250, 248, 240, 0.94)
+        ),
+        url("fondo-naturaleza.jpg") center / cover no-repeat;
+
+    transform: scale(1.02);
+}
+
+body.pagina-ciencias::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    pointer-events: none;
+
+    opacity: 0.35;
+
+    background:
+        radial-gradient(
+            circle at 8% 18%,
+            rgba(67, 139, 105, 0.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 74%,
+            rgba(195, 162, 101, 0.13),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(220, 232, 214, 0.25),
+            transparent 36%
+        );
+}
+
+
+/* ================================================================
+   04. ANIMACIONES
+================================================================ */
+
+@keyframes ciencias-entrada {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ciencias-izquierda {
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes ciencias-derecha {
+    from {
+        opacity: 0;
+        transform: translateX(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes ciencias-escala {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes ciencias-orbita {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ciencias-pulso {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.045);
+        opacity: 1;
+    }
+}
+
+@keyframes ciencias-subrayado {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes ciencias-resplandor {
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(195, 162, 101, 0.04),
+            0 0 22px rgba(67, 139, 105, 0.08);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 9px rgba(195, 162, 101, 0.035),
+            0 0 33px rgba(67, 139, 105, 0.16);
+    }
+}
+
+@keyframes ciencias-hoja {
+    0%,
+    100% {
+        transform: rotate(-7deg);
+    }
+
+    50% {
+        transform: rotate(7deg);
+    }
+}
+
+
+/* ================================================================
+   05. ENCABEZADO INSTITUCIONAL
+================================================================ */
+
+.encabezado-principal.header-ciencias {
+    position: relative;
+    z-index: 50;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+
+    align-items: center;
+    gap: 28px;
+
+    width: 100%;
+    padding: 19px 5%;
+
+    background: rgba(255, 253, 248, 0.91);
+
+    border-bottom: 1px solid var(--borde-oro);
+
+    box-shadow:
+        0 9px 30px rgba(15, 48, 37, 0.06),
+        0 1px 0 rgba(255, 255, 255, 0.9) inset;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    animation: ciencias-entrada 0.7s ease both;
+}
+
+.encabezado-principal.header-ciencias::after {
+    content: "";
+
+    position: absolute;
+    bottom: -1px;
+    left: 6%;
+    right: 6%;
+
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--esmeralda),
+        var(--oro),
+        var(--salvia),
+        transparent
+    );
+
+    pointer-events: none;
+}
+
+.header-ciencias .logo {
+    position: relative;
+
+    display: grid;
+    place-items: center;
+}
+
+.header-ciencias .logo::before {
+    content: "";
+
+    position: absolute;
+    inset: -7px;
+
+    border: 1px solid var(--borde-oro);
+    border-radius: 50%;
+
+    transition:
+        transform var(--transicion-larga),
+        border-color var(--transicion);
+}
+
+.header-ciencias .logo:hover::before {
+    transform: rotate(35deg) scale(1.12);
+    border-color: var(--esmeralda);
+}
+
+.logo-institucion {
+    width: 76px;
+    height: 76px;
+
+    padding: 5px;
+
+    object-fit: contain;
+
+    background: var(--blanco);
+
+    border: 2px solid var(--oro);
+    border-radius: 50%;
+
+    box-shadow:
+        0 5px 17px rgba(21, 56, 47, 0.11),
+        0 0 0 5px rgba(255, 255, 255, 0.62);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+}
+
+.logo-institucion:hover {
+    transform: rotate(-5deg) scale(1.06);
+
+    border-color: var(--esmeralda);
+
+    box-shadow:
+        0 10px 26px rgba(32, 86, 66, 0.2),
+        0 0 0 6px rgba(195, 162, 101, 0.1);
+}
+
+.logo-institucion:active {
+    transform: scale(0.97);
+}
+
+.tema-proyecto {
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: clamp(18px, 1.6vw, 25px);
+    font-weight: 700;
+
+    line-height: 1.4;
+    letter-spacing: -0.4px;
+
+    text-wrap: balance;
+
+    transition:
+        color var(--transicion),
+        letter-spacing var(--transicion);
+}
+
+.tema-proyecto:hover {
+    color: var(--esmeralda);
+    letter-spacing: 0;
+}
+
+
+/* ================================================================
+   06. MENÚ DE NAVEGACIÓN
+================================================================ */
+
+.menu-navegacion ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    list-style: none;
+}
+
+.menu-navegacion li {
+    position: relative;
+}
+
+.menu-navegacion a {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 15px;
+
+    color: var(--pino);
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 13px;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+
+    transition:
+        color var(--transicion),
+        background var(--transicion),
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+}
+
+.menu-navegacion a::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    left: -115%;
+    top: 0;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.7),
+        transparent
+    );
+
+    transition: left 0.65s ease;
+}
+
+.menu-navegacion a::after {
+    content: "";
+
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    right: 15px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform var(--transicion);
+}
+
+.menu-navegacion a:hover {
+    color: var(--bosque);
+
+    background: rgba(220, 232, 214, 0.75);
+
+    border-color: rgba(67, 139, 105, 0.15);
+
+    transform: translateY(-3px);
+
+    box-shadow: var(--sombra-suave);
+}
+
+.menu-navegacion a:hover::before {
+    left: 130%;
+}
+
+.menu-navegacion a:hover::after,
+.menu-navegacion a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.menu-navegacion a:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
+}
+
+.menu-navegacion li:last-child a {
+    background: rgba(220, 232, 214, 0.6);
+    border-color: var(--borde-oro);
+}
+
+.menu-navegacion li:last-child a:hover {
+    color: var(--blanco);
+    background: var(--bosque);
+    border-color: var(--oro);
+}
+
+
+/* ================================================================
+   07. PORTADA PRINCIPAL
+================================================================ */
+
+.portada-principal.seccion-1 {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(300px, min(39vw, 455px));
+
+    align-items: center;
+    gap: clamp(35px, 5vw, 75px);
+
+    min-height: 660px;
+
+    padding: 76px 7% 84px;
+
+    color: var(--texto-claro);
+
+    background:
+        linear-gradient(
+            115deg,
+            rgba(12, 40, 31, 0.98),
+            rgba(21, 65, 48, 0.96) 52%,
+            rgba(37, 91, 62, 0.88)
+        ),
+        url("fondo-naturaleza.jpg") center / cover no-repeat;
+}
+
+.portada-principal.seccion-1::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -220px;
+    right: -100px;
+
+    width: 560px;
+    height: 560px;
+
+    border: 1px solid rgba(230, 212, 165, 0.27);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 30px rgba(230, 212, 165, 0.04),
+        0 0 0 65px rgba(230, 212, 165, 0.027),
+        0 0 0 105px rgba(230, 212, 165, 0.015);
+
+    animation: ciencias-orbita 80s linear infinite;
+
+    pointer-events: none;
+}
+
+.portada-principal.seccion-1::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    bottom: -220px;
+    left: 10%;
+
+    width: 450px;
+    height: 450px;
+
+    background: rgba(93, 157, 99, 0.19);
+
+    filter: blur(85px);
+
+    animation: ciencias-pulso 9s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+.contenedor-portada {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 680px;
+
+    animation: ciencias-izquierda 0.9s ease both;
+}
+
+.titulo-principal {
+    margin-bottom: 20px;
+
+    color: #fff5d9;
+
+    font-family: var(--fuente-titulos);
+    font-size: clamp(68px, 7.2vw, 108px);
+    font-weight: 700;
+
+    line-height: 1.03;
+    letter-spacing: -3px;
+
+    text-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.15),
+        0 0 40px rgba(230, 212, 165, 0.07);
+
+    text-wrap: balance;
+}
+
+.titulo-principal::after {
+    content: "";
+
+    display: block;
+
+    width: 110px;
+    height: 5px;
+
+    margin-top: 25px;
+    margin-bottom: 26px;
+
+    border-radius: 50px;
+
+    background: linear-gradient(
+        90deg,
+        var(--oro-claro),
+        var(--oro),
+        transparent
+    );
+
+    transform-origin: left;
+
+    animation: ciencias-subrayado 1s ease 0.3s both;
+}
+
+.contenedor-portada > span {
+    display: block;
+
+    max-width: 640px;
+
+    margin-bottom: 22px;
+
+    color: var(--oro-claro);
+
+    font-family: var(--fuente-titulos);
+    font-size: clamp(20px, 2vw, 28px);
+    font-style: italic;
+
+    line-height: 1.55;
+
+    text-wrap: balance;
+
+    transition: color var(--transicion);
+}
+
+.contenedor-portada > span:hover {
+    color: var(--blanco);
+}
+
+.contenedor-portada .explicacion {
+    max-width: 620px;
+
+    color: rgba(255, 255, 255, 0.87);
+
+    font-size: 15px;
+    line-height: 2;
+}
+
+
+/* ================================================================
+   08. PORTADA CUADRADA
+================================================================ */
+
+.imagen-principal-ciencias {
+    position: relative;
+    z-index: 1;
+
+    min-width: 0;
+
+    animation: ciencias-derecha 1s ease 0.12s both;
+}
+
+.portada-ciencias {
+    width: 100%;
+    max-width: 455px;
+
+    aspect-ratio: 1 / 1;
+
+    justify-self: end;
+
+    border-radius: 28px 70px 28px 70px;
+}
+
+.imagen-principal-ciencias::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    inset: -13px;
+
+    border: 1px solid rgba(230, 212, 165, 0.65);
+
+    border-radius: 32px 76px 32px 76px;
+
+    transform: rotate(2deg);
+
+    transition:
+        transform var(--transicion-larga),
+        border-color var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.imagen-principal-ciencias::after {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    right: -17px;
+    bottom: -17px;
+
+    width: 90px;
+    height: 90px;
+
+    border-right: 3px solid var(--oro);
+    border-bottom: 3px solid var(--oro);
+
+    border-radius: 0 0 20px 0;
+
+    pointer-events: none;
+
+    transition:
+        width var(--transicion),
+        height var(--transicion),
+        border-color var(--transicion);
+}
+
+.ciencias-imagen {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: 5px solid rgba(255, 255, 255, 0.17);
+
+    border-radius: inherit;
+
+    box-shadow:
+        0 25px 65px rgba(0, 0, 0, 0.29),
+        0 0 0 1px rgba(230, 212, 165, 0.12);
+
+    transition:
+        transform var(--transicion-larga),
+        filter var(--transicion-larga),
+        box-shadow var(--transicion-larga);
+}
+
+.portada-ciencias:hover .ciencias-imagen {
+    transform: scale(1.025) translateY(-4px);
+
+    filter: saturate(1.1) contrast(1.025);
+
+    box-shadow:
+        0 36px 78px rgba(0, 0, 0, 0.35),
+        0 0 28px rgba(195, 162, 101, 0.13);
+}
+
+.portada-ciencias:hover::before {
+    transform: rotate(-2deg) scale(1.02);
+
+    border-color: var(--oro-claro);
+
+    box-shadow: var(--resplandor-oro);
+}
+
+.portada-ciencias:hover::after {
+    width: 110px;
+    height: 110px;
+
+    border-color: var(--oro-claro);
+}
+
+
+/* ================================================================
+   09. FONDOS Y ESPACIADO
+================================================================ */
+
+.concepto,
+.objetivos,
+.areas-conocimiento,
+.formacion-academica,
+.competencias-ciencias,
+.aprendizaje-cientifico,
+.aplicaciones-ciencias,
+.proyeccion-academica,
+.otras-especializaciones {
+    position: relative;
+    isolation: isolate;
+
+    padding: 94px 6.5%;
+}
+
+.concepto,
+.aplicaciones-ciencias {
+    background: rgba(255, 253, 248, 0.93);
+}
+
+.objetivos,
+.areas-conocimiento,
+.competencias-ciencias,
+.proyeccion-academica,
+.otras-especializaciones {
+    background: rgba(232, 241, 228, 0.95);
+}
+
+.formacion-academica,
+.aprendizaje-cientifico {
+    background: rgba(250, 248, 240, 0.97);
+}
+
+.areas-conocimiento::before,
+.competencias-ciencias::before,
+.otras-especializaciones::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: 40px;
+    right: -90px;
+
+    width: 290px;
+    height: 360px;
+
+    border: 1px solid rgba(32, 86, 66, 0.1);
+
+    border-radius: 70% 30% 65% 35% / 45% 35% 65% 55%;
+
+    transform: rotate(25deg);
+
+    pointer-events: none;
+
+    transition:
+        transform 1s ease,
+        border-color 1s ease;
+}
+
+.areas-conocimiento:hover::before,
+.competencias-ciencias:hover::before,
+.otras-especializaciones:hover::before {
+    transform: rotate(37deg) translate(-8px, 8px);
+
+    border-color: rgba(195, 162, 101, 0.24);
+}
+
+
+/* ================================================================
+   10. ENCABEZADOS GENERALES
+================================================================ */
+
+.principales-areas,
+.contenido-objetivos,
+.encabezado-formacion,
+.encabezado-seccion-ciencias {
+    width: 100%;
+    max-width: 880px;
+
+    margin: 0 auto 54px;
+
+    text-align: center;
+}
+
+.titulo-consiste,
+.titulo-objetivos,
+.titulo-areas,
+.encabezado-formacion h2,
+.encabezado-seccion-ciencias h2 {
+    position: relative;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: clamp(34px, 3.2vw, 44px);
+    font-weight: 700;
+
+    line-height: 1.28;
+    letter-spacing: -0.8px;
+
+    text-wrap: balance;
+
+    margin-bottom: 22px;
+}
+
+.titulo-consiste::after,
+.titulo-objetivos::after,
+.titulo-areas::after,
+.encabezado-formacion h2::after,
+.encabezado-seccion-ciencias h2::after {
+    content: "";
+
+    display: block;
+
+    width: 76px;
+    height: 4px;
+
+    margin-top: 20px;
+
+    border-radius: 50px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro)
+    );
+
+    transform: scaleX(0.8);
+    transform-origin: center;
+
+    transition:
+        width var(--transicion),
+        transform var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.titulo-consiste:hover::after,
+.titulo-objetivos:hover::after,
+.titulo-areas:hover::after,
+.encabezado-formacion h2:hover::after,
+.encabezado-seccion-ciencias h2:hover::after {
+    width: 125px;
+    transform: scaleX(1);
+
+    box-shadow: var(--resplandor-oro);
+}
+
+.titulo-objetivos::after,
+.titulo-areas::after,
+.encabezado-formacion h2::after,
+.encabezado-seccion-ciencias h2::after {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.introduccion-areas,
+.descripcion-formacion,
+.encabezado-formacion > p,
+.encabezado-seccion-ciencias > p,
+.parrafo-objetivos {
+    color: var(--texto-suave);
+
+    font-size: 15px;
+    line-height: 1.95;
+}
+
+.descripcion-formacion + .descripcion-formacion {
+    margin-top: 16px;
+}
+
+.etiqueta-formacion,
+.etiqueta-ciencias {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 19px;
+    padding: 8px 16px;
+
+    color: var(--bosque);
+
+    background: rgba(220, 232, 214, 0.83);
+
+    border: 1px solid rgba(67, 139, 105, 0.23);
+    border-radius: 50px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    line-height: 1.5;
+
+    transition:
+        color var(--transicion),
+        background var(--transicion),
+        border-color var(--transicion),
+        transform var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.etiqueta-formacion:hover,
+.etiqueta-ciencias:hover {
+    color: var(--blanco);
+
+    background: var(--bosque);
+
+    border-color: var(--oro);
+
+    transform: translateY(-3px);
+
+    box-shadow: var(--sombra-suave);
+}
+
+
+/* ================================================================
+   11. CONCEPTO DE LA ESPECIALIDAD
+================================================================ */
+
+.concepto.que-consiste {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(0, 1.05fr);
+
+    align-items: center;
+
+    gap: 65px;
+}
+
+.imagen-explicacion {
+    position: relative;
+    min-width: 0;
+
+    animation: ciencias-izquierda 0.9s ease both;
+}
+
+.imagen-explicacion::before {
+    content: "";
+
+    position: absolute;
+
+    top: -15px;
+    left: -15px;
+
+    width: 42%;
+    height: 42%;
+
+    border-top: 3px solid var(--oro);
+    border-left: 3px solid var(--oro);
+
+    border-radius: 18px 0 0 0;
+
+    transition:
+        width var(--transicion),
+        height var(--transicion),
+        transform var(--transicion);
+}
+
+.imagen-explicacion::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    right: -16px;
+    bottom: -16px;
+
+    width: 105px;
+    height: 105px;
+
+    background: var(--salvia-clara);
+
+    border-radius: 23px;
+
+    transition:
+        transform var(--transicion),
+        background var(--transicion);
+}
+
+.imagen-explicacion:hover::before {
+    width: 52%;
+    height: 52%;
+
+    transform: translate(-4px, -4px);
+}
+
+.imagen-explicacion:hover::after {
+    background: var(--oro-claro);
+
+    transform: translate(5px, 5px) rotate(5deg);
+}
+
+.explicar {
+    width: 100%;
+    height: 410px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: 5px solid rgba(255, 255, 255, 0.94);
+
+    border-radius: 24px 68px 24px 24px;
+
+    box-shadow: var(--sombra-media);
+
+    transition:
+        transform var(--transicion-larga),
+        box-shadow var(--transicion-larga),
+        border-radius var(--transicion-larga),
+        filter var(--transicion-larga);
+}
+
+.imagen-explicacion:hover .explicar {
+    transform: translateY(-6px);
+
+    border-radius: 65px 24px 24px 24px;
+
+    box-shadow: var(--sombra-intensa);
+
+    filter: saturate(1.07);
+}
+
+.titulo-explicacion {
+    animation: ciencias-derecha 0.9s ease 0.12s both;
+}
+
+.titulo-explicacion .explicacion {
+    margin-top: 16px;
+
+    color: var(--texto-suave);
+
+    font-size: 15px;
+    line-height: 2;
+}
+
+.titulo-explicacion .explicacion + .explicacion {
+    margin-top: 18px;
+}
+
+
+/* ================================================================
+   12. OBJETIVOS
+================================================================ */
+
+.contenido-objetivos {
+    max-width: 810px;
+}
+
+.contenido-objetivos .parrafo-objetivos {
+    margin-top: 15px;
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 23px;
+
+    max-width: var(--ancho-contenido);
+
+    margin: 0 auto;
+}
+
+.explicacion-article {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 29px 24px 32px;
+
+    background: rgba(255, 253, 248, 0.96);
+
+    border: 1px solid var(--borde);
+    border-radius: 20px 20px 33px 20px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion),
+        background var(--transicion);
+
+    animation: ciencias-entrada 0.75s ease both;
+}
+
+.explicacion-article:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.explicacion-article:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.explicacion-article:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.explicacion-article::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro),
+        var(--salvia)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.5s ease;
+}
+
+.explicacion-article::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -52px;
+    right: -48px;
+
+    width: 135px;
+    height: 135px;
+
+    border: 1px solid rgba(67, 139, 105, 0.11);
+    border-radius: 50%;
+
+    background: rgba(220, 232, 214, 0.32);
+
+    transition:
+        transform 0.65s ease,
+        background var(--transicion),
+        border-color var(--transicion);
+}
+
+.explicacion-article:hover,
+.explicacion-article:focus-within {
+    transform: translateY(-9px);
+
+    background: var(--blanco);
+
+    border-color: rgba(67, 139, 105, 0.36);
+
+    box-shadow: var(--sombra-media);
+}
+
+.explicacion-article:hover::before,
+.explicacion-article:focus-within::before {
+    transform: scaleX(1);
+}
+
+.explicacion-article:hover::after {
+    transform: scale(1.4);
+
+    background: rgba(220, 232, 214, 0.7);
+
+    border-color: var(--borde-oro);
+}
+
+.explicacion-article .numeracion {
+    position: relative;
+
+    display: inline-block;
+
+    margin-bottom: 17px;
+
+    color: var(--oro);
+
+    font-family: var(--fuente-titulos);
+    font-size: 37px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    transition:
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+.explicacion-article:hover .numeracion {
+    color: var(--esmeralda);
+    transform: translateX(4px);
+}
+
+.emoji:empty {
+    display: none;
+}
+
+.explicacion-article h4 {
+    margin-bottom: 12px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 19px;
+    line-height: 1.45;
+
+    transition: color var(--transicion);
+}
+
+.explicacion-article:hover h4 {
+    color: var(--esmeralda);
+}
+
+.explicacion-article p {
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* ================================================================
+   13. ÁREAS DEL CONOCIMIENTO
+================================================================ */
+
+.areas-conocimiento {
+    overflow: hidden;
+}
+
+.principales-areas {
+    max-width: 880px;
+}
+
+.areas-articles {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 23px;
+
+    max-width: var(--ancho-contenido);
+
+    margin: 0 auto;
+}
+
+.areas {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(255, 253, 248, 0.97);
+
+    border: 1px solid var(--borde);
+    border-radius: 23px 23px 34px 23px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+
+    animation: ciencias-escala 0.75s ease both;
+}
+
+.areas:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.areas:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.areas:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.areas::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro),
+        var(--salvia)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.5s ease;
+}
+
+.areas::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    right: -60px;
+    bottom: -75px;
+
+    width: 155px;
+    height: 155px;
+
+    border: 1px solid rgba(67, 139, 105, 0.09);
+    border-radius: 50%;
+
+    transition:
+        transform 0.65s ease,
+        border-color 0.65s ease;
+}
+
+.areas:hover {
+    transform: translateY(-9px);
+
+    border-color: rgba(67, 139, 105, 0.39);
+
+    box-shadow: var(--sombra-media);
+}
+
+.areas:hover::before {
+    transform: scaleX(1);
+}
+
+.areas:hover::after {
+    transform: scale(1.4);
+
+    border-color: var(--borde-oro);
+}
+
+.imagen-areas {
+    width: 100%;
+    height: 225px;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+        transform var(--transicion-larga),
+        filter var(--transicion-larga);
+}
+
+.areas:hover .imagen-areas {
+    transform: scale(1.055);
+
+    filter: saturate(1.1) contrast(1.02);
+}
+
+.tema-area {
+    margin: 24px 22px 11px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 21px;
+    line-height: 1.4;
+
+    transition:
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+.areas:hover .tema-area {
+    color: var(--esmeralda);
+    transform: translateX(3px);
+}
+
+.parrafo-articles-areas {
+    margin: 0 22px 26px;
+
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* ================================================================
+   14. SECCIÓN DE MATERIAS
+================================================================ */
+
+.contenedor-formacion {
+    width: 100%;
+    max-width: var(--ancho-contenido);
+
+    margin: 0 auto;
+}
+
+.encabezado-formacion {
+    max-width: 890px;
+}
+
+.encabezado-categoria {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+
+    align-items: start;
+    gap: 22px;
+
+    margin: 64px 0 27px;
+    padding: 28px 30px;
+
+    background: linear-gradient(
+        115deg,
+        rgba(220, 232, 214, 0.91),
+        rgba(255, 253, 248, 0.88)
+    );
+
+    border: 1px solid rgba(67, 139, 105, 0.2);
+    border-left: 5px solid var(--esmeralda);
+
+    border-radius: 0 24px 24px 0;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        transform var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.encabezado-categoria::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -70px;
+    right: -60px;
+
+    width: 195px;
+    height: 195px;
+
+    border: 1px solid rgba(67, 139, 105, 0.1);
+    border-radius: 50%;
+
+    transition:
+        transform 0.75s ease,
+        border-color 0.75s ease;
+}
+
+.encabezado-categoria:hover {
+    background: rgba(228, 238, 222, 0.98);
+
+    border-left-color: var(--oro);
+
+    transform: translateX(4px);
+
+    box-shadow: var(--sombra-media);
+}
+
+.encabezado-categoria:hover::after {
+    transform: scale(1.35);
+
+    border-color: var(--borde-oro);
+}
+
+.numero-seccion {
+    display: grid;
+    place-items: center;
+
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    color: var(--blanco);
+
+    background: linear-gradient(
+        145deg,
+        var(--esmeralda),
+        var(--pino)
+    );
+
+    border: 2px solid rgba(230, 212, 165, 0.8);
+    border-radius: 50%;
+
+    box-shadow: 0 6px 16px rgba(21, 56, 47, 0.15);
+
+    font-family: var(--fuente-titulos);
+    font-size: 19px;
+    font-weight: 700;
+
+    transition:
+        transform var(--transicion),
+        border-radius var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.encabezado-categoria:hover .numero-seccion {
+    transform: rotate(-7deg) scale(1.05);
+
+    border-radius: 17px;
+
+    box-shadow: var(--resplandor-verde);
+}
+
+.encabezado-categoria h3 {
+    margin-bottom: 7px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 25px;
+    line-height: 1.4;
+}
+
+.encabezado-categoria p {
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.materias-formacion {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    align-items: stretch;
+    gap: 23px;
+}
+
+.tarjeta-materia {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 29px 26px 31px;
+
+    background: rgba(255, 253, 248, 0.97);
+
+    border: 1px solid var(--borde);
+    border-radius: 23px 23px 35px 23px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion),
+        background var(--transicion);
+
+    animation: ciencias-entrada 0.7s ease both;
+}
+
+.tarjeta-materia:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.tarjeta-materia:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+.tarjeta-materia:nth-child(4) {
+    animation-delay: 0.24s;
+}
+
+.tarjeta-materia::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro),
+        var(--salvia)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.5s ease;
+}
+
+.tarjeta-materia::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    right: -54px;
+    bottom: -62px;
+
+    width: 150px;
+    height: 150px;
+
+    border: 1px solid rgba(67, 139, 105, 0.09);
+
+    border-radius: 70% 30% 60% 40% / 45% 50% 50% 55%;
+
+    background: rgba(220, 232, 214, 0.2);
+
+    transform: rotate(18deg);
+
+    transition:
+        transform 0.8s ease,
+        border-color 0.8s ease;
+}
+
+.tarjeta-materia:hover,
+.tarjeta-materia:focus-within {
+    transform: translateY(-8px);
+
+    background: var(--blanco);
+
+    border-color: rgba(67, 139, 105, 0.4);
+
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta-materia:hover::before,
+.tarjeta-materia:focus-within::before {
+    transform: scaleX(1);
+}
+
+.tarjeta-materia:hover::after {
+    transform: rotate(34deg) scale(1.22);
+
+    border-color: var(--borde-oro);
+}
+
+.icono-materia {
+    display: grid;
+    place-items: center;
+
+    width: 67px;
+    height: 67px;
+
+    flex-shrink: 0;
+
+    margin-bottom: 22px;
+
+    color: var(--bosque-claro);
+
+    background: linear-gradient(
+        145deg,
+        #f3f7ee,
+        #dce8d6
+    );
+
+    border: 1px solid rgba(67, 139, 105, 0.18);
+    border-radius: 20px;
+
+    box-shadow:
+        0 6px 14px rgba(21, 56, 47, 0.055),
+        inset 0 1px 0 rgba(255, 255, 255, 0.88);
+
+    transition:
+        color var(--transicion),
+        background var(--transicion),
+        transform var(--transicion),
+        border-radius var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.icono-materia i {
+    font-size: 27px;
+
+    transition:
+        transform var(--transicion),
+        filter var(--transicion);
+}
+
+.tarjeta-materia:hover .icono-materia {
+    color: var(--blanco);
+
+    background: linear-gradient(
+        135deg,
+        var(--esmeralda),
+        var(--pino)
+    );
+
+    border-radius: 50%;
+
+    transform: rotate(-6deg);
+
+    box-shadow:
+        0 9px 22px rgba(32, 86, 66, 0.22),
+        0 0 0 5px rgba(220, 232, 214, 0.55);
+}
+
+.tarjeta-materia:hover .icono-materia i {
+    transform: scale(1.12);
+}
+
+.tarjeta-materia h4 {
+    margin-bottom: 13px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 21px;
+    line-height: 1.45;
+
+    transition: color var(--transicion);
+}
+
+.tarjeta-materia:hover h4 {
+    color: var(--esmeralda);
+}
+
+.tarjeta-materia p {
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.92;
+}
+
+
+/* ================================================================
+   15. CIERRE DE LA SECCIÓN MATERIAS
+================================================================ */
+
+.cierre-formacion {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+
+    align-items: center;
+    gap: 26px;
+
+    margin-top: 58px;
+    padding: 37px 40px;
+
+    color: var(--texto-claro);
+
+    background:
+        linear-gradient(
+            115deg,
+            rgba(13, 41, 35, 0.99),
+            rgba(32, 86, 66, 0.97),
+            rgba(47, 113, 83, 0.95)
+        );
+
+    border: 1px solid rgba(230, 212, 165, 0.45);
+    border-radius: 29px;
+
+    box-shadow: var(--sombra-media);
+}
+
+.cierre-formacion::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -145px;
+    right: -90px;
+
+    width: 320px;
+    height: 320px;
+
+    border: 1px solid rgba(230, 212, 165, 0.21);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 27px rgba(230, 212, 165, 0.035),
+        0 0 0 55px rgba(230, 212, 165, 0.022);
+
+    transition: transform 1s ease;
+}
+
+.cierre-formacion:hover::before {
+    transform: rotate(24deg) scale(1.07);
+}
+
+.icono-cierre {
+    display: grid;
+    place-items: center;
+
+    width: 77px;
+    height: 77px;
+
+    color: var(--oro-claro);
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(230, 212, 165, 0.48);
+    border-radius: 50%;
+
+    font-size: 31px;
+
+    animation: ciencias-resplandor 5s ease-in-out infinite;
+
+    transition:
+        transform var(--transicion),
+        color var(--transicion),
+        background var(--transicion);
+}
+
+.cierre-formacion:hover .icono-cierre {
+    color: var(--blanco);
+
+    background: rgba(255, 255, 255, 0.14);
+
+    transform: rotate(-8deg) scale(1.05);
+}
+
+.texto-cierre h3 {
+    margin-bottom: 9px;
+
+    color: #fff2d5;
+
+    font-family: var(--fuente-titulos);
+    font-size: 25px;
+    line-height: 1.4;
+}
+
+.texto-cierre p {
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* ================================================================
+   16. HABILIDADES Y COMPETENCIAS
+================================================================ */
+
+.rejilla-competencias {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    align-items: stretch;
+    gap: 22px;
+}
+
+.tarjeta-competencia {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 29px 24px;
+
+    background: rgba(255, 253, 248, 0.97);
+
+    border: 1px solid var(--borde);
+    border-radius: 22px 22px 33px 22px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+}
+
+.tarjeta-competencia::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    right: -48px;
+    bottom: -52px;
+
+    width: 140px;
+    height: 140px;
+
+    border: 1px solid rgba(67, 139, 105, 0.1);
+    border-radius: 50%;
+
+    transition:
+        transform 0.65s ease,
+        border-color 0.65s ease;
+}
+
+.tarjeta-competencia:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(67, 139, 105, 0.37);
+
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta-competencia:hover::before {
+    transform: scale(1.4);
+
+    border-color: var(--borde-oro);
+}
+
+.icono-competencia {
+    display: grid;
+    place-items: center;
+
+    width: 62px;
+    height: 62px;
+
+    margin-bottom: 22px;
+
+    color: var(--bosque-claro);
+
+    background: linear-gradient(
+        145deg,
+        #f3f7ee,
+        #dce8d6
+    );
+
+    border: 1px solid rgba(67, 139, 105, 0.18);
+    border-radius: 19px;
+
+    transition:
+        color var(--transicion),
+        background var(--transicion),
+        transform var(--transicion),
+        border-radius var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.icono-competencia i {
+    font-size: 26px;
+}
+
+.tarjeta-competencia:hover .icono-competencia {
+    color: var(--blanco);
+
+    background: linear-gradient(
+        135deg,
+        var(--esmeralda),
+        var(--pino)
+    );
+
+    transform: rotate(-7deg);
+
+    border-radius: 50%;
+
+    box-shadow: var(--resplandor-verde);
+}
+
+.numero-competencia {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--oro);
+
+    font-family: var(--fuente-titulos);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    transition:
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+.tarjeta-competencia:hover .numero-competencia {
+    color: var(--esmeralda);
+    transform: translateX(4px);
+}
+
+.tarjeta-competencia h3 {
+    margin-bottom: 12px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 19px;
+    line-height: 1.45;
+
+    transition: color var(--transicion);
+}
+
+.tarjeta-competencia:hover h3 {
+    color: var(--esmeralda);
+}
+
+.tarjeta-competencia p {
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* ================================================================
+   17. IMAGEN DE HABILIDADES Y COMPETENCIAS
+================================================================ */
+
+/*
+   La imagen utiliza una proporción 4:3.
+   object-fit: contain evita recortes.
+   La fotografía queda centrada dentro de un marco botánico.
+*/
+
+.imagen-competencias {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    width: min(100%, 820px);
+
+    aspect-ratio: 4 / 3;
+    height: auto;
+
+    margin: 48px auto 0;
+    padding: 12px;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(195, 162, 101, 0.17),
+            transparent 36%
+        ),
+        linear-gradient(
+            145deg,
+            #eff4e8,
+            #dce8d6
+        );
+
+    border: 1px solid rgba(67, 139, 105, 0.22);
+
+    border-radius: 36px 18px 36px 18px;
+
+    box-shadow:
+        var(--sombra-media),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+    transition:
+        border-radius var(--transicion-larga),
+        box-shadow var(--transicion-larga),
+        transform var(--transicion-larga),
+        border-color var(--transicion);
+}
+
+.imagen-competencias::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    inset: 22px;
+
+    border: 1px solid rgba(195, 162, 101, 0.45);
+
+    border-radius: 25px 10px 25px 10px;
+
+    pointer-events: none;
+
+    transition:
+        inset var(--transicion),
+        border-color var(--transicion);
+}
+
+.imagen-competencias::after {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    right: 0;
+    bottom: 0;
+
+    width: 85px;
+    height: 85px;
+
+    background: linear-gradient(
+        135deg,
+        transparent 48%,
+        rgba(195, 162, 101, 0.85) 49%,
+        rgba(195, 162, 101, 0.85) 51%,
+        transparent 52%
+    );
+
+    opacity: 0.55;
+
+    pointer-events: none;
+
+    transition:
+        opacity var(--transicion),
+        transform var(--transicion);
+}
+
+.imagen-competencias img {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    background: rgba(255, 253, 248, 0.72);
+
+    border-radius: 26px 12px 26px 12px;
+
+    transition:
+        filter var(--transicion-larga),
+        transform var(--transicion-larga);
+}
+
+.imagen-competencias:hover {
+    transform: translateY(-5px);
+
+    border-radius: 18px 36px 18px 36px;
+
+    border-color: rgba(195, 162, 101, 0.57);
+
+    box-shadow:
+        0 23px 48px rgba(15, 48, 37, 0.15),
+        0 0 24px rgba(195, 162, 101, 0.1);
+}
+
+.imagen-competencias:hover::before {
+    inset: 17px;
+
+    border-color: rgba(67, 139, 105, 0.38);
+}
+
+.imagen-competencias:hover::after {
+    opacity: 0.85;
+    transform: translate(3px, 3px);
+}
+
+.imagen-competencias:hover img {
+    filter: saturate(1.06) contrast(1.015);
+}
+
+
+/* ================================================================
+   18. APRENDIZAJE CIENTÍFICO
+================================================================ */
+
+.contenido-aprendizaje {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(0, 1.05fr);
+
+    align-items: center;
+    gap: 55px;
+}
+
+.imagen-aprendizaje {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    min-width: 0;
+    height: 480px;
+
+    border: 5px solid rgba(255, 255, 255, 0.93);
+
+    border-radius: 28px 58px 25px 25px;
+
+    box-shadow: var(--sombra-media);
+}
+
+.imagen-aprendizaje::before {
+    content: "";
+
+    position: absolute;
+    z-index: 1;
+
+    inset: 0;
+
+    background: linear-gradient(
+        180deg,
+        transparent 48%,
+        rgba(13, 41, 35, 0.3)
+    );
+
+    pointer-events: none;
+
+    transition: opacity var(--transicion);
+}
+
+.imagen-aprendizaje::after {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    top: 20px;
+    left: 20px;
+
+    width: 60px;
+    height: 60px;
+
+    border-top: 2px solid var(--oro-claro);
+    border-left: 2px solid var(--oro-claro);
+
+    border-radius: 13px 0 0 0;
+
+    pointer-events: none;
+
+    transition:
+        width var(--transicion),
+        height var(--transicion);
+}
+
+.imagen-aprendizaje img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+        transform var(--transicion-larga),
+        filter var(--transicion-larga);
+}
+
+.imagen-aprendizaje:hover img {
+    transform: scale(1.05);
+
+    filter: saturate(1.08);
+}
+
+.imagen-aprendizaje:hover::after {
+    width: 80px;
+    height: 80px;
+}
+
+.etapas-aprendizaje {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.etapa-cientifica {
+    position: relative;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+
+    align-items: start;
+    gap: 19px;
+
+    padding: 21px;
+
+    background: rgba(255, 253, 248, 0.9);
+
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+
+    box-shadow: 0 4px 14px rgba(15, 48, 37, 0.035);
+
+    transition:
+        transform var(--transicion),
+        background var(--transicion),
+        border-color var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.etapa-cientifica::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 3px;
+
+    background: linear-gradient(
+        180deg,
+        var(--esmeralda),
+        var(--oro)
+    );
+
+    transform: scaleY(0);
+    transform-origin: top;
+
+    transition: transform 0.5s ease;
+}
+
+.etapa-cientifica:hover {
+    transform: translateX(6px);
+
+    background: var(--blanco);
+
+    border-color: rgba(67, 139, 105, 0.34);
+
+    box-shadow: var(--sombra-suave);
+}
+
+.etapa-cientifica:hover::before {
+    transform: scaleY(1);
+}
+
+.numero-etapa {
+    display: grid;
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    color: var(--blanco);
+
+    background: linear-gradient(
+        145deg,
+        var(--esmeralda),
+        var(--pino)
+    );
+
+    border: 1px solid rgba(230, 212, 165, 0.4);
+    border-radius: 15px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    box-shadow: 0 5px 13px rgba(21, 56, 47, 0.13);
+
+    transition:
+        transform var(--transicion),
+        border-radius var(--transicion);
+}
+
+.etapa-cientifica:hover .numero-etapa {
+    transform: rotate(-5deg) scale(1.04);
+    border-radius: 50%;
+}
+
+.etapa-cientifica h3 {
+    margin-bottom: 6px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 19px;
+    line-height: 1.45;
+}
+
+.etapa-cientifica p {
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.nota-aprendizaje,
+.nota-carreras {
+    margin-top: 29px;
+    padding: 18px 22px;
+
+    color: var(--texto-suave);
+
+    background: rgba(220, 232, 214, 0.72);
+
+    border: 1px solid rgba(67, 139, 105, 0.15);
+    border-left: 4px solid var(--oro);
+
+    border-radius: 0 14px 14px 0;
+
+    font-size: 13px;
+    line-height: 1.85;
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        transform var(--transicion);
+}
+
+.nota-aprendizaje:hover,
+.nota-carreras:hover {
+    background: rgba(220, 232, 214, 0.96);
+
+    border-left-color: var(--esmeralda);
+
+    transform: translateX(4px);
+}
+
+
+/* ================================================================
+   19. APLICACIONES DE LAS CIENCIAS
+================================================================ */
+
+.rejilla-aplicaciones {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 27px;
+
+    max-width: 1120px;
+
+    margin: 0 auto;
+}
+
+.tarjeta-aplicacion {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.88fr)
+        minmax(0, 1.12fr);
+
+    min-width: 0;
+
+    background: rgba(255, 253, 248, 0.97);
+
+    border: 1px solid var(--borde);
+    border-radius: 23px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+}
+
+.tarjeta-aplicacion::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.5s ease;
+}
+
+.tarjeta-aplicacion:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(67, 139, 105, 0.35);
+
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta-aplicacion:hover::before {
+    transform: scaleX(1);
+}
+
+.imagen-aplicacion {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 300px;
+}
+
+.imagen-aplicacion::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        transparent 60%,
+        rgba(13, 41, 35, 0.15)
+    );
+
+    pointer-events: none;
+
+    transition: opacity var(--transicion);
+}
+
+.imagen-aplicacion img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform var(--transicion-larga),
+        filter var(--transicion-larga);
+}
+
+.tarjeta-aplicacion:hover .imagen-aplicacion img {
+    transform: scale(1.07);
+
+    filter: saturate(1.1) contrast(1.02);
+}
+
+.contenido-aplicacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+
+    padding: 26px 24px;
+}
+
+.numero-aplicacion {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: var(--esmeralda);
+
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: 1.7px;
+
+    transition:
+        color var(--transicion),
+        letter-spacing var(--transicion);
+}
+
+.tarjeta-aplicacion:hover .numero-aplicacion {
+    color: #9b793f;
+    letter-spacing: 2px;
+}
+
+.contenido-aplicacion h3 {
+    margin-bottom: 12px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 22px;
+    line-height: 1.4;
+
+    transition:
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+.tarjeta-aplicacion:hover .contenido-aplicacion h3 {
+    color: var(--esmeralda);
+    transform: translateX(3px);
+}
+
+.contenido-aplicacion p {
+    color: var(--texto-suave);
+
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+
+/* ================================================================
+   20. PROYECCIÓN ACADÉMICA
+================================================================ */
+
+.rejilla-carreras {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+.tarjeta-carrera {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 29px 23px;
+
+    background: rgba(255, 253, 248, 0.97);
+
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+}
+
+.tarjeta-carrera::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.5s ease;
+}
+
+.tarjeta-carrera::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    right: -53px;
+    bottom: -63px;
+
+    width: 145px;
+    height: 145px;
+
+    border: 1px solid rgba(67, 139, 105, 0.1);
+    border-radius: 50%;
+
+    transition: transform 0.7s ease;
+}
+
+.tarjeta-carrera:hover,
+.tarjeta-carrera:focus-within {
+    transform: translateY(-8px);
+
+    border-color: rgba(67, 139, 105, 0.4);
+
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta-carrera:hover::before,
+.tarjeta-carrera:focus-within::before {
+    transform: scaleX(1);
+}
+
+.tarjeta-carrera:hover::after {
+    transform: scale(1.4);
+}
+
+.icono-carrera {
+    display: grid;
+    place-items: center;
+
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: 21px;
+
+    color: var(--bosque-claro);
+
+    background: linear-gradient(
+        145deg,
+        #f3f7ee,
+        #dce8d6
+    );
+
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+
+    transition:
+        transform var(--transicion),
+        color var(--transicion),
+        background var(--transicion),
+        border-radius var(--transicion);
+}
+
+.icono-carrera i {
+    font-size: 26px;
+}
+
+.tarjeta-carrera:hover .icono-carrera {
+    color: var(--blanco);
+
+    background: linear-gradient(
+        135deg,
+        var(--esmeralda),
+        var(--pino)
+    );
+
+    transform: rotate(-6deg);
+
+    border-radius: 50%;
+}
+
+.tarjeta-carrera h3 {
+    margin-bottom: 12px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 20px;
+    line-height: 1.45;
+
+    transition: color var(--transicion);
+}
+
+.tarjeta-carrera:hover h3 {
+    color: var(--esmeralda);
+}
+
+.tarjeta-carrera p {
+    margin-bottom: 18px;
+
+    color: var(--texto-suave);
+
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.tarjeta-carrera ul {
+    display: grid;
+    gap: 10px;
+
+    list-style: none;
+}
+
+.tarjeta-carrera li {
+    position: relative;
+
+    padding-left: 18px;
+
+    color: var(--bosque);
+
+    font-size: 13px;
+    line-height: 1.65;
+
+    transition:
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+.tarjeta-carrera li::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0.65em;
+    left: 0;
+
+    width: 7px;
+    height: 7px;
+
+    background: var(--oro);
+
+    border-radius: 50%;
+
+    transition:
+        transform var(--transicion),
+        background var(--transicion);
+}
+
+.tarjeta-carrera li:hover {
+    color: var(--esmeralda);
+    transform: translateX(4px);
+}
+
+.tarjeta-carrera li:hover::before {
+    background: var(--esmeralda);
+    transform: scale(1.3);
+}
+
+
+/* ================================================================
+   21. TEST DE ORIENTACIÓN
+================================================================ */
+
+.test-orientacion {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 94px 6.5%;
+
+    color: var(--texto-claro);
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(13, 41, 35, 0.99),
+            rgba(26, 72, 52, 0.97),
+            rgba(45, 98, 65, 0.92)
+        ),
+        url("fondo-naturaleza.jpg") center / cover no-repeat;
+}
+
+.test-orientacion::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -165px;
+    right: -110px;
+
+    width: 440px;
+    height: 440px;
+
+    border: 1px solid rgba(230, 212, 165, 0.25);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 30px rgba(230, 212, 165, 0.035),
+        0 0 0 65px rgba(230, 212, 165, 0.022),
+        0 0 0 105px rgba(230, 212, 165, 0.013);
+
+    animation: ciencias-orbita 85s linear infinite;
+}
+
+.test-orientacion::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    bottom: -185px;
+    left: 5%;
+
+    width: 370px;
+    height: 370px;
+
+    background: rgba(91, 150, 93, 0.21);
+
+    filter: blur(80px);
+
+    animation: ciencias-pulso 8s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+.contenedor-test {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(0, 0.9fr);
+
+    align-items: center;
+    gap: 65px;
+
+    width: 100%;
+    max-width: var(--ancho-contenido);
+
+    margin: 0 auto;
+}
+
+.contenido-test {
+    animation: ciencias-izquierda 0.9s ease both;
+}
+
+.etiqueta-test {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 21px;
+    padding: 9px 15px;
+
+    color: var(--oro-claro);
+
+    background: rgba(255, 255, 255, 0.065);
+
+    border: 1px solid rgba(230, 212, 165, 0.4);
+    border-radius: 50px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+
+    transition:
+        transform var(--transicion),
+        background var(--transicion),
+        border-color var(--transicion);
+}
+
+.etiqueta-test:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border-color: var(--oro-claro);
+}
+
+.contenido-test h2 {
+    margin-bottom: 23px;
+
+    color: #fff2d5;
+
+    font-family: var(--fuente-titulos);
+    font-size: clamp(35px, 3.4vw, 46px);
+    line-height: 1.27;
+
+    letter-spacing: -0.7px;
+
+    text-wrap: balance;
+}
+
+.contenido-test p {
+    margin-bottom: 26px;
+
+    color: rgba(255, 255, 255, 0.86);
+
+    font-size: 14px;
+    line-height: 2;
+}
+
+
+/* Botón para realizar el test */
+
+.boton-test {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    min-height: 57px;
+
+    padding: 15px 25px;
+
+    color: var(--pino-oscuro);
+
+    background: linear-gradient(
+        110deg,
+        #f3e4b8,
+        #d5b875,
+        #f3e4b8
+    );
+
+    background-size: 220% 100%;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 13px;
+
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.19),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    text-decoration: none;
+    text-align: center;
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        background-position 0.65s ease,
+        border-color var(--transicion);
+}
+
+.boton-test::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -50%;
+    left: -95%;
+
+    width: 58%;
+    height: 200%;
+
+    background: rgba(255, 255, 255, 0.4);
+
+    transform: rotate(25deg);
+
+    transition: left 0.7s ease;
+}
+
+.boton-test:hover {
+    transform: translateY(-4px);
+
+    background-position: 100% center;
+
+    border-color: var(--oro-claro);
+
+    box-shadow:
+        0 17px 35px rgba(0, 0, 0, 0.25),
+        0 0 22px rgba(230, 212, 165, 0.13);
+}
+
+.boton-test:hover::before {
+    left: 145%;
+}
+
+.boton-test:active {
+    transform: translateY(-1px) scale(0.985);
+}
+
+.boton-test i {
+    font-size: 18px;
+
+    transition: transform var(--transicion);
+}
+
+.boton-test:hover i {
+    transform: rotate(-10deg) scale(1.12);
+}
+
+.texto-test {
+    display: block;
+
+    margin-top: 16px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+
+/* Imagen del test */
+
+.imagen-test {
+    position: relative;
+    min-width: 0;
+
+    animation: ciencias-derecha 1s ease 0.12s both;
+}
+
+.imagen-test::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    inset: -12px;
+
+    border: 1px solid rgba(230, 212, 165, 0.5);
+
+    border-radius: 30px;
+
+    transform: rotate(2deg);
+
+    transition:
+        transform var(--transicion),
+        border-color var(--transicion);
+}
+
+.imagen-test img {
+    position: relative;
+
+    width: 100%;
+    height: 390px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: 4px solid rgba(255, 255, 255, 0.17);
+    border-radius: 26px;
+
+    box-shadow: var(--sombra-intensa);
+
+    transition:
+        transform var(--transicion-larga),
+        filter var(--transicion-larga),
+        box-shadow var(--transicion-larga);
+}
+
+.imagen-test:hover img {
+    transform: scale(1.025);
+
+    filter: saturate(1.09);
+
+    box-shadow:
+        0 30px 65px rgba(0, 0, 0, 0.32),
+        0 0 25px rgba(230, 212, 165, 0.1);
+}
+
+.imagen-test:hover::before {
+    transform: rotate(-2deg);
+
+    border-color: var(--oro-claro);
+}
+
+
+/* ================================================================
+   22. OTRAS ESPECIALIZACIONES
+================================================================ */
+
+.rejilla-especializaciones {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    align-items: stretch;
+    gap: 30px;
+
+    max-width: 1080px;
+
+    margin: 0 auto;
+}
+
+.tarjeta-especializacion {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(255, 253, 248, 0.97);
+
+    border: 1px solid var(--borde);
+    border-radius: 28px;
+
+    box-shadow: var(--sombra-suave);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+
+    animation: ciencias-entrada 0.8s ease both;
+}
+
+.tarjeta-especializacion.especialidad-financiera {
+    animation-delay: 0.15s;
+}
+
+.tarjeta-especializacion::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--esmeralda),
+        var(--oro),
+        var(--salvia)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.5s ease;
+}
+
+.tarjeta-especializacion:hover {
+    transform: translateY(-9px);
+
+    border-color: rgba(67, 139, 105, 0.4);
+
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta-especializacion:hover::before {
+    transform: scaleX(1);
+}
+
+.imagen-especializacion {
+    position: relative;
+    overflow: hidden;
+
+    height: 275px;
+    flex-shrink: 0;
+}
+
+.imagen-especializacion::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(13, 41, 35, 0.44),
+        transparent 60%
+    );
+
+    opacity: 0.72;
+
+    pointer-events: none;
+
+    transition: opacity var(--transicion);
+}
+
+.imagen-especializacion img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+        transform var(--transicion-larga),
+        filter var(--transicion-larga);
+}
+
+.tarjeta-especializacion:hover .imagen-especializacion img {
+    transform: scale(1.06);
+
+    filter: saturate(1.08);
+}
+
+.tarjeta-especializacion:hover .imagen-especializacion::after {
+    opacity: 0.4;
+}
+
+.contenido-especializacion {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    flex: 1;
+
+    padding: 29px 30px 32px;
+}
+
+.numero-especializacion {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: var(--oro);
+
+    font-family: var(--fuente-titulos);
+    font-size: 30px;
+    font-weight: 700;
+
+    transition:
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+.tarjeta-especializacion:hover .numero-especializacion {
+    color: var(--esmeralda);
+
+    transform: translateX(4px);
+}
+
+.contenido-especializacion h3 {
+    margin-bottom: 12px;
+
+    color: var(--pino);
+
+    font-family: var(--fuente-titulos);
+    font-size: 25px;
+    line-height: 1.4;
+
+    transition: color var(--transicion);
+}
+
+.tarjeta-especializacion:hover .contenido-especializacion h3 {
+    color: var(--esmeralda);
+}
+
+.contenido-especializacion p {
+    margin-bottom: 4px;
+
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* ================================================================
+   23. BOTONES DE LAS OTRAS ESPECIALIZACIONES
+================================================================ */
+
+/*
+   IMPORTANTE:
+   El HTML que enviaste contiene enlaces sin clase, por ejemplo:
+
+   <a href="desarrollo-software.html">
+       Ir a Desarrollo de Software
+   </a>
+
+   Por eso se utiliza el selector:
+   .contenido-especializacion > a
+
+   Así los enlaces reciben el estilo de botón sin modificar el HTML.
+*/
+
+.contenido-especializacion > a {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin-top: auto;
+    padding: 13px 21px;
+
+    color: var(--blanco);
+
+    background: linear-gradient(
+        125deg,
+        #367b58,
+        #205642 58%,
+        #15382f
+    );
+
+    background-size: 200% 100%;
+    background-position: left center;
+
+    border: 1px solid rgba(195, 162, 101, 0.52);
+    border-radius: 50px;
+
+    box-shadow:
+        0 8px 20px rgba(21, 56, 47, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+    font-family: var(--fuente-textos);
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.5;
+
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+
+    transition:
+        color var(--transicion),
+        background var(--transicion-larga),
+        background-position 0.65s ease,
+        transform var(--transicion),
+        box-shadow var(--transicion),
+        border-color var(--transicion);
+}
+
+/* Brillo que cruza el botón */
+
+.contenido-especializacion > a::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -50%;
+    left: -95%;
+
+    width: 55%;
+    height: 200%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.28),
+        transparent
+    );
+
+    transform: rotate(24deg);
+
+    transition: left 0.7s ease;
+}
+
+/* Indicador de flecha */
+
+.contenido-especializacion > a::after {
+    content: "→";
+
+    display: inline-block;
+
+    color: var(--oro-claro);
+
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1;
+
+    transition:
+        transform var(--transicion),
+        color var(--transicion);
+}
+
+.contenido-especializacion > a:hover {
+    color: var(--pino-oscuro);
+
+    background: linear-gradient(
+        120deg,
+        #f0dfb0,
+        #d9bd80,
+        #f0dfb0
+    );
+
+    background-position: right center;
+
+    border-color: var(--oro-claro);
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 28px rgba(21, 56, 47, 0.18),
+        0 0 20px rgba(195, 162, 101, 0.16);
+}
+
+.contenido-especializacion > a:hover::before {
+    left: 150%;
+}
+
+.contenido-especializacion > a:hover::after {
+    color: var(--pino-oscuro);
+    transform: translateX(5px);
+}
+
+.contenido-especializacion > a:active {
+    transform: translateY(-1px) scale(0.98);
+
+    box-shadow:
+        0 5px 12px rgba(21, 56, 47, 0.15);
+}
+
+.contenido-especializacion > a:focus-visible {
+    outline: 3px solid var(--oro);
+    outline-offset: 5px;
+}
+
+
+/* ================================================================
+   24. PIE DE PÁGINA
+================================================================ */
+
+.footer-ciencias {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 62px 6.5% 0;
+
+    color: rgba(255, 255, 255, 0.84);
+
+    background: linear-gradient(
+        125deg,
+        #0d2923,
+        #15382f 48%,
+        #245b41
+    );
+}
+
+.footer-ciencias::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: -160px;
+    right: -105px;
+
+    width: 415px;
+    height: 415px;
+
+    border: 1px solid rgba(230, 212, 165, 0.2);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 34px rgba(230, 212, 165, 0.026),
+        0 0 0 72px rgba(230, 212, 165, 0.017);
+
+    animation: ciencias-orbita 90s linear infinite;
+}
+
+.footer-ciencias::after {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    bottom: -175px;
+    left: -100px;
+
+    width: 340px;
+    height: 340px;
+
+    border-radius: 50%;
+
+    background: rgba(67, 139, 105, 0.2);
+
+    filter: blur(78px);
+
+    pointer-events: none;
+}
+
+.contenedor-footer {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: 1.25fr 0.85fr 1fr;
+
+    gap: 43px;
+
+    width: 100%;
+    max-width: var(--ancho-contenido);
+
+    margin: 0 auto;
+    padding-bottom: 44px;
+}
+
+.footer-identidad {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 19px;
+}
+
+.logo-footer {
+    flex-shrink: 0;
+
+    width: 78px;
+    height: 78px;
+
+    padding: 5px;
+
+    object-fit: contain;
+
+    background: var(--blanco);
+
+    border: 2px solid var(--oro);
+    border-radius: 50%;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.logo-footer:hover {
+    transform: rotate(-5deg) scale(1.05);
+
+    box-shadow: var(--resplandor-oro);
+}
+
+.datos-institucion h2 {
+    margin-bottom: 9px;
+
+    color: #fff2d5;
+
+    font-family: var(--fuente-titulos);
+    font-size: 20px;
+    line-height: 1.45;
+}
+
+.datos-institucion p,
+.footer-informacion p,
+.footer-navegacion p {
+    color: rgba(255, 255, 255, 0.74);
+
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.datos-institucion p + p {
+    margin-top: 9px;
+}
+
+.footer-navegacion h3,
+.footer-informacion h3 {
+    margin-bottom: 16px;
+
+    color: #fff2d5;
+
+    font-family: var(--fuente-titulos);
+    font-size: 20px;
+    line-height: 1.45;
+}
+
+.footer-inferior {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 22px 0;
+
+    border-top: 1px solid rgba(230, 212, 165, 0.23);
+}
+
+.footer-inferior p {
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 12px;
+    line-height: 1.8;
+
+    text-align: center;
+}
+
+
+/* ================================================================
+   25. ACCESIBILIDAD Y ESTADOS FINALES
+================================================================ */
+
+.tarjeta-materia:focus-within,
+.areas:focus-within,
+.explicacion-article:focus-within,
+.tarjeta-competencia:focus-within,
+.tarjeta-carrera:focus-within,
+.tarjeta-aplicacion:focus-within,
+.tarjeta-especializacion:focus-within {
+    outline: 2px solid rgba(195, 162, 101, 0.7);
+    outline-offset: 4px;
+}
+
+.emoji:empty {
+    display: none;
+}
+
+.areas-articles .areas:last-child,
+.materias-formacion .tarjeta-materia:last-child {
+    margin-bottom: 0;
+}
+
+section:target {
+    scroll-margin-top: 100px;
+}
+
+.menu-navegacion a:active,
+.boton-test:active,
+.contenido-especializacion > a:active {
+    filter: brightness(0.97);
+}

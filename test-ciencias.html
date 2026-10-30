@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Explora tus intereses científicos mediante un test interactivo de orientación académica."
+    >
+
+    <meta name="theme-color" content="#10382c">
+
+    <title>Test de Ciencias | Orientación Académica</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="test-ciencias.css">
+
+    <script src="test-ciencias.js" defer></script>
+</head>
+
+<body class="pagina-test-ciencias">
+
+    <div class="fondo-decorativo" aria-hidden="true">
+        <span class="molecula molecula-uno"></span>
+        <span class="molecula molecula-dos"></span>
+        <span class="molecula molecula-tres"></span>
+        <span class="orbita orbita-uno"></span>
+        <span class="orbita orbita-dos"></span>
+    </div>
+
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezado-test">
+
+        <a
+            href="ciencias.html"
+            class="marca-test"
+            aria-label="Volver a la página de Ciencias"
+        >
+
+            <span class="logo-test">
+                <img
+                    src="logo-dolores-sucre.png"
+                    alt="Logo de la Unidad Educativa Fiscal Dolores Sucre"
+                >
+            </span>
+
+            <span class="texto-marca">
+                <strong>Dolores Sucre</strong>
+                <small>Orientación académica</small>
+            </span>
+
+        </a>
+
+
+        <div class="identificador-test">
+            <span class="punto-activo"></span>
+            TEST DE CIENCIAS
+        </div>
+
+
+        <a href="ciencias.html" class="enlace-regreso">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Volver a Ciencias
+        </a>
+
+    </header>
+
+
+    <main class="contenido-test-principal">
+
+        <!-- =====================================================
+             PORTADA DE BIENVENIDA
+        ====================================================== -->
+
+        <section
+            class="pantalla-inicio panel-principal"
+            id="pantalla-inicio"
+        >
+
+            <div class="inicio-texto">
+
+                <span class="etiqueta-superior">
+                    <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                    DESCUBRE TU CURIOSIDAD
+                </span>
+
+                <h1>
+                    ¿Qué tanto te interesa el
+                    <span>mundo de las ciencias?</span>
+                </h1>
+
+                <p class="descripcion-inicio">
+                    Descubre qué áreas del conocimiento científico
+                    despiertan más tu curiosidad. Responde preguntas
+                    sobre tus intereses y recibe una orientación
+                    para explorar la especialidad de Ciencias.
+                </p>
+
+
+                <div class="datos-test">
+
+                    <div class="dato-test">
+
+                        <span class="icono-dato">
+                            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                        </span>
+
+                        <span>
+                            <strong>10 preguntas</strong>
+                            <small>Una por pantalla</small>
+                        </span>
+
+                    </div>
+
+
+                    <div class="dato-test">
+
+                        <span class="icono-dato">
+                            <i class="fa-solid fa-compass" aria-hidden="true"></i>
+                        </span>
+
+                        <span>
+                            <strong>Resultado personal</strong>
+                            <small>Según tus respuestas</small>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="boton-principal"
+                    id="boton-comenzar"
+                >
+
+                    <span>Comenzar test</span>
+
+                    <span class="flecha-boton">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
+
+                </button>
+
+
+                <p class="nota-inicio">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    No existen respuestas correctas o incorrectas.
+                    Elige según tus intereses reales.
+                </p>
+
+            </div>
+
+
+            <!-- ILUSTRACIÓN CIENTÍFICA HECHA CON CSS E ICONOS -->
+
+            <div class="ilustracion-cientifica" aria-hidden="true">
+
+                <div class="halo-principal"></div>
+
+                <div class="anillo-cientifico anillo-externo"></div>
+                <div class="anillo-cientifico anillo-intermedio"></div>
+                <div class="anillo-cientifico anillo-interno"></div>
+
+                <div class="nucleo-cientifico">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+
+                <span class="icono-orbita icono-orbita-uno">
+                    <i class="fa-solid fa-atom"></i>
+                </span>
+
+                <span class="icono-orbita icono-orbita-dos">
+                    <i class="fa-solid fa-flask"></i>
+                </span>
+
+                <span class="icono-orbita icono-orbita-tres">
+                    <i class="fa-solid fa-dna"></i>
+                </span>
+
+                <span class="icono-orbita icono-orbita-cuatro">
+                    <i class="fa-solid fa-microscope"></i>
+                </span>
+
+
+                <div class="insignia-cientifica insignia-superior">
+                    <i class="fa-solid fa-sparkles" aria-hidden="true"></i>
+                    Curiosidad
+                </div>
+
+                <div class="insignia-cientifica insignia-inferior">
+                    <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                    Descubrimiento
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PANTALLA DE PREGUNTAS
+        ====================================================== -->
+
+        <section
+            class="panel-preguntas oculto"
+            id="panel-preguntas"
+            aria-labelledby="titulo-pregunta"
+        >
+
+            <div class="encabezado-progreso">
+
+                <div class="texto-progreso">
+
+                    <span class="etiqueta-progreso">
+                        <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                        EXPLORA TUS INTERESES
+                    </span>
+
+                    <p
+                        class="contador-pregunta"
+                        id="contador-pregunta"
+                    >
+                        Pregunta 1 de 10
+                    </p>
+
+                </div>
+
+
+                <div class="porcentaje-progreso">
+                    <span id="porcentaje-progreso">0%</span>
+                    <small>completado</small>
+                </div>
+
+            </div>
+
+
+            <div
+                class="barra-progreso"
+                role="progressbar"
+                aria-label="Progreso del test"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                id="contenedor-barra-progreso"
+            >
+
+                <div
+                    class="relleno-progreso"
+                    id="relleno-progreso"
+                ></div>
+
+            </div>
+
+
+            <div class="tarjeta-pregunta" id="tarjeta-pregunta">
+
+                <div class="decoracion-pregunta" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+
+                <div class="cabecera-pregunta">
+
+                    <span class="numero-grande" id="numero-grande">
+                        01
+                    </span>
+
+                    <span class="categoria-pregunta" id="categoria-pregunta">
+                        CONOCIMIENTO CIENTÍFICO
+                    </span>
+
+                </div>
+
+
+                <h2 id="titulo-pregunta">
+                    ¿Qué temas despiertan tu curiosidad?
+                </h2>
+
+                <p class="ayuda-pregunta" id="ayuda-pregunta">
+                    Selecciona la opción que mejor representa tus intereses.
+                </p>
+
+
+                <div
+                    class="opciones-respuesta"
+                    id="opciones-respuesta"
+                    role="group"
+                    aria-label="Opciones de respuesta"
+                ></div>
+
+
+                <p class="aviso-seleccion" id="aviso-seleccion">
+                    <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+                    Selecciona una respuesta para continuar.
+                </p>
+
+
+                <div class="navegacion-preguntas">
+
+                    <button
+                        type="button"
+                        class="boton-anterior"
+                        id="boton-anterior"
+                    >
+
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        Anterior
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="boton-siguiente"
+                        id="boton-siguiente"
+                        disabled
+                    >
+
+                        <span id="texto-boton-siguiente">
+                            Siguiente
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <p class="pie-pregunta">
+                <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                Tus respuestas sirven para explorar tus preferencias,
+                no para medir tu capacidad académica.
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PANTALLA DE RESULTADOS
+        ====================================================== -->
+
+        <section
+            class="panel-resultados oculto"
+            id="panel-resultados"
+            aria-labelledby="titulo-resultado"
+            aria-live="polite"
+        >
+
+            <div class="encabezado-resultados">
+
+                <span class="etiqueta-superior">
+                    <i class="fa-solid fa-award" aria-hidden="true"></i>
+                    RESULTADO DEL TEST
+                </span>
+
+                <h1 id="titulo-resultado">
+                    Tus intereses científicos
+                </h1>
+
+                <p id="descripcion-resultado">
+                    Aquí descubrirás qué tanto se relacionan tus intereses
+                    actuales con la exploración científica.
+                </p>
+
+            </div>
+
+
+            <div class="resumen-resultados">
+
+                <div class="medidor-resultado">
+
+                    <div class="circulo-resultado" id="circulo-resultado">
+
+                        <div class="contenido-circulo">
+
+                            <strong id="puntuacion-resultado">0%</strong>
+
+                            <span>afinidad</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="texto-resultado">
+
+                    <span class="nivel-resultado" id="nivel-resultado">
+                        EXPLORADOR CIENTÍFICO
+                    </span>
+
+                    <h2 id="subtitulo-resultado">
+                        Tus intereses pueden seguir creciendo.
+                    </h2>
+
+                    <p id="detalle-resultado">
+                        Este resultado es una referencia inicial para
+                        reflexionar sobre las actividades y temas que
+                        te gustaría conocer.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="bloque-areas">
+
+                <div class="titulo-bloque">
+
+                    <span class="mini-etiqueta">
+                        TUS PREFERENCIAS
+                    </span>
+
+                    <h2>Áreas que podrían interesarte</h2>
+
+                    <p>
+                        Estas orientaciones se calculan a partir de tus
+                        respuestas. La primera área corresponde a la
+                        preferencia que has expresado con mayor intensidad.
+                    </p>
+
+                </div>
+
+
+                <div class="lista-areas" id="lista-areas"></div>
+
+            </div>
+
+
+            <div class="mensaje-final">
+
+                <div class="icono-mensaje-final">
+                    <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                </div>
+
+                <div>
+
+                    <h3>La curiosidad es un punto de partida</h3>
+
+                    <p>
+                        No necesitas conocer todos los temas científicos
+                        desde el principio. Puedes descubrir nuevos intereses
+                        mediante la lectura, la observación, los experimentos
+                        escolares y las preguntas sobre el mundo que te rodea.
+                        Este test no determina tu futuro ni reemplaza la
+                        orientación de tus docentes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="acciones-resultados">
+
+                <button
+                    type="button"
+                    class="boton-repetir"
+                    id="boton-repetir"
+                >
+
+                    <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                    Repetir test
+
+                </button>
+
+
+                <a href="ciencias.html" class="boton-volver-ciencias">
+
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Volver a Ciencias
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="pie-test">
+
+        <span class="linea-pie"></span>
+
+        <p>
+            Unidad Educativa Fiscal Dolores Sucre
+        </p>
+
+        <small>
+            Proyecto de orientación académica ·
+            <span id="anio-test"></span>
+        </small>
+
+    </footer>
+
+</body>
+</html>
